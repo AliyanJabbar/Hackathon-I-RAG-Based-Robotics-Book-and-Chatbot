@@ -3,7 +3,7 @@ sidebar_position: 8
 title: 'Human-Robot Interaction Visualization'
 slug: /chapter-3-digital-twin/human-robot-visualization
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

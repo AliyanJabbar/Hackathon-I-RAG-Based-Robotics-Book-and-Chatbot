@@ -3,7 +3,7 @@ sidebar_position: 1
 title: "Chapter 2 The Robotic Nervous System (ROS 2)"
 slug: /chapter-2-robotic-nervous-system
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

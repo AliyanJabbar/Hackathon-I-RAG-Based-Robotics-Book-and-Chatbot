@@ -1,9 +1,9 @@
 ---
 sidebar_position: 1
-title: 'Introduction to The Digital Twin'
+title: 'Chapter 3 Introduction to The Digital Twin'
 slug: /chapter-3-digital-twin/
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

@@ -3,7 +3,7 @@ sidebar_position: 6
 title: "Humanoid Sensors"
 slug: /chapter-1-physical-ai/05-humanoid-sensors
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

@@ -3,7 +3,7 @@ sidebar_position: 5
 title: 'Robot Description Formats: URDF & SDF'
 slug: /chapter-3-digital-twin/robot-description-formats
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

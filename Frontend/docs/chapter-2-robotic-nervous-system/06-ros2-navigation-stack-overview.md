@@ -3,7 +3,7 @@ sidebar_position: 7
 title: "ROS 2 Navigation Stack Overview"
 slug: /chapter-2-robotic-nervous-system/06-ros2-navigation-stack-overview
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

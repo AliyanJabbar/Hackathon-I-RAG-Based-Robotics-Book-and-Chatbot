@@ -3,7 +3,7 @@ sidebar_position: 2
 title: 'What is a Digital Twin?'
 slug: /chapter-3-digital-twin/what-is-digital-twin
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

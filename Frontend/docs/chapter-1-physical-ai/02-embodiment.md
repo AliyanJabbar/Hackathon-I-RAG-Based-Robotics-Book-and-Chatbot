@@ -3,7 +3,7 @@ sidebar_position: 3
 title: "Embodiment"
 slug: /chapter-1-physical-ai/01-embodiment
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

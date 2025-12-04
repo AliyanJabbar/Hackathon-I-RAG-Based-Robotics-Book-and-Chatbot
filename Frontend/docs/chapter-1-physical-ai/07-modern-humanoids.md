@@ -3,7 +3,7 @@ sidebar_position: 8
 title: "Modern Humanoids"
 slug: /chapter-1-physical-ai/07-modern-humanoids
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

@@ -3,7 +3,7 @@ sidebar_position: 3
 title: 'Physics Simulation Fundamentals'
 slug: /chapter-3-digital-twin/physics-simulation
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

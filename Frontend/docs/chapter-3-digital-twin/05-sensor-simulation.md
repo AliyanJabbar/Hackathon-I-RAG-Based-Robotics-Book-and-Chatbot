@@ -3,7 +3,7 @@ sidebar_position: 6
 title: 'Sensor Simulation for Humanoids'
 slug: /chapter-3-digital-twin/sensor-simulation
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

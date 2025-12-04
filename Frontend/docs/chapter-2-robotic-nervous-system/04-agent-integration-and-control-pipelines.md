@@ -3,7 +3,7 @@ sidebar_position: 5
 title: "Agent Integration and Control Pipelines"
 slug: /chapter-2-robotic-nervous-system/04-agent-integration-and-control-pipelines
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

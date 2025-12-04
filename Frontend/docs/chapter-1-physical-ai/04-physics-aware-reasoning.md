@@ -3,7 +3,7 @@ sidebar_position: 5
 title: "Physics-Aware Reasoning"
 slug: /chapter-1-physical-ai/04-physics-aware-reasoning
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

@@ -3,7 +3,7 @@ sidebar_position: 2
 title: "What is Physical AI?"
 slug: /chapter-1-physical-ai/01-what-is-physical-ai
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

@@ -3,7 +3,7 @@ sidebar_position: 6
 title: "Robot Description: URDF and Xacro"
 slug: /chapter-2-robotic-nervous-system/05-robot-description-urdf-xacro
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

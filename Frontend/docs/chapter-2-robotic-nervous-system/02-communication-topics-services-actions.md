@@ -3,7 +3,7 @@ sidebar_position: 3
 title: "Communication: Topics, Services, and Actions"
 slug: /chapter-2-robotic-nervous-system/02-communication-topics-services-actions
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

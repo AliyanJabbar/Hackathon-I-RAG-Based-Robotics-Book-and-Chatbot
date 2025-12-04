@@ -3,7 +3,7 @@ sidebar_position: 7
 title: 'Unity Environment Creation for High-Fidelity Rendering'
 slug: /chapter-3-digital-twin/unity-environment
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

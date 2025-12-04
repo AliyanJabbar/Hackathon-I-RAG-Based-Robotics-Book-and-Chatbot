@@ -3,7 +3,7 @@ sidebar_position: 4
 title: 'Gazebo Simulation Environment'
 slug: /chapter-3-digital-twin/gazebo-setup
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

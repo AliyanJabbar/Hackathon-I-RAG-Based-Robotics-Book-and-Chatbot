@@ -3,7 +3,7 @@ sidebar_position: 9
 title: 'Learning Outcomes: Weeks 6–7'
 slug: /chapter-3-digital-twin/learning-outcomes
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

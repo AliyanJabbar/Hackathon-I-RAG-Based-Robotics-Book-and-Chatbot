@@ -3,7 +3,7 @@ sidebar_position: 4
 title: "Sensorimotor Intelligence"
 slug: /chapter-1-physical-ai/03-sensorimotor-intelligence
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

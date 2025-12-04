@@ -3,7 +3,7 @@ sidebar_position: 2
 title: "Middleware and Architecture"
 slug: /chapter-2-robotic-nervous-system/01-ros2-middleware-and-architecture
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 

@@ -3,7 +3,7 @@ sidebar_position: 9
 title: "ROS 2 Navigation Advanced Topics"
 slug: /chapter-2-robotic-nervous-system/08-ros2-navigation-advanced-topics
 ---
-import ChapterTranslator from '@site/src/components/Translation/ChapterTranslator';
+import ChapterTranslator from '@site/src/components/Translation/chapterTranslator';
 
 <ChapterTranslator>
 
