@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(`${API_URL}/users/me`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
-      setUser(response.data); // data now includes "name"
-      console.log("users:",response.data);
+      setUser(response.data);
+      console.log("users:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         await refreshAccessToken();
@@ -66,6 +66,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (userData) => {
+    const response = await axios.post(`${API_URL}/register`, userData);
+    return response.data;
+  };
+
   const login = async (email, password) => {
     const formData = new URLSearchParams();
     formData.append('username', email);
@@ -87,7 +92,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

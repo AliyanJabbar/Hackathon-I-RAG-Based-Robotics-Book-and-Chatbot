@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import axios from 'axios';
 import { useHistory } from '@docusaurus/router';
 import { useAuth } from '../../context/AuthContext';
 import styles from './styles.module.css'; 
@@ -19,7 +18,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   
   const history = useHistory();
-  const { login } = useAuth();
+  const { login, register } = useAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -27,11 +26,11 @@ export default function Register() {
     setLoading(true);
     
     try {
-      // Send the new fields to the backend
-      await axios.post('http://127.0.0.1:8000/register', {
-        name: name,
-        email: email,
-        password: password,
+      // Use the register method from useAuth
+      await register({
+        name,
+        email,
+        password,
         software_experience: softwareExp,
         hardware_experience: hardwareExp
       });
@@ -40,7 +39,6 @@ export default function Register() {
       await login(email, password);
       history.push('/docs/chapter-1-physical-ai');
     } catch (err) {
-      console.error(err);
       setError(err.response?.data?.detail || 'Registration failed. Please try again.');
     } finally {
       setLoading(false);
