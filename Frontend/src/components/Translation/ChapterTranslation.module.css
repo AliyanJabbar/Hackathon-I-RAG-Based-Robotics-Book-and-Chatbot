@@ -183,3 +183,93 @@
     width: 100%;
   }
 }
+
+
+.customizeButton {
+  /* You can make it look distinct or similar to the translate button */
+  background: var(--translator-btn-bg); /* Use same colors for consistency */
+  border-color: rgba(0, 0, 0, 0.15); /* Slightly different border perhaps */
+}
+
+/* For light theme */
+[data-theme='light'] .customizeButton {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* For dark theme */
+[data-theme='dark'] .customizeButton {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.customizeButton:hover {
+  background: var(--translator-btn-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px var(--translator-btn-shadow);
+}
+
+/* ... Keep your existing button and wrapper styles ... */
+
+/* New Styles for the Customized Markdown Content */
+.customizedContent {
+  margin-top: 1rem;
+  line-height: 1.6;
+  font-family: inherit;
+  color: var(--ifm-font-color-base, inherit);
+}
+
+.customizedContent h1, 
+.customizedContent h2, 
+.customizedContent h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.customizedContent ul, 
+.customizedContent ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.customizedContent li {
+  margin-bottom: 0.25rem;
+}
+
+.customizedContent p {
+  margin-bottom: 1rem;
+}
+
+/* TABLE STYLING */
+.customizedContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  display: block;
+  overflow-x: auto; /* Adds scrollbar if table is too wide */
+}
+
+.customizedContent th,
+.customizedContent td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+/* Use Docusaurus theme variables if available, otherwise gray fallback */
+.customizedContent th {
+  background-color: var(--ifm-color-emphasis-100, #f3f4f6);
+  font-weight: bold;
+}
+
+[data-theme='dark'] .customizedContent th {
+  background-color: var(--ifm-color-emphasis-100, #374151);
+  border-color: #4b5563;
+}
+
+[data-theme='dark'] .customizedContent td {
+  border-color: #4b5563;
+}
+
+.customizedContent strong {
+  font-weight: bold;
+}
