@@ -42,7 +42,6 @@ chat_openrouter_model = OpenAIChatCompletionsModel(
 
 chat_config = RunConfig(
     model=chat_openrouter_model,
-    tracing_disabled=True,
 )
 
 # Content Customization API config
@@ -62,7 +61,6 @@ customize_openrouter_model = OpenAIChatCompletionsModel(
 
 customize_config = RunConfig(
     model=customize_openrouter_model,
-    tracing_disabled=True,
 )
 
 # Translation API config
@@ -82,5 +80,4 @@ translate_openrouter_model = OpenAIChatCompletionsModel(
 
 translate_config = RunConfig(
     model=translate_openrouter_model,
-    tracing_disabled=True,
 )
