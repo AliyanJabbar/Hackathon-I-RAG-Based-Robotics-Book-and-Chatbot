@@ -41,32 +41,41 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
     return '';
   }, []);
 
-  // Free translation using MyMemory API
+  // Translation using backend API
   async function translateToUrdu(text: string): Promise<string> {
-    const chunkSize = 500;
-    const chunks: string[] = [];
-    for (let i = 0; i < text.length; i += chunkSize) {
-      chunks.push(text.substring(i, i + chunkSize));
+    // Get token directly from localStorage since it's not exposed in AuthContext value
+    const token = localStorage.getItem('access_token');
+
+    if (!token || !user) {
+      throw new Error('You must be logged in to translate content.');
     }
 
     try {
-      const translatedChunks = await Promise.all(
-        chunks.map(async (chunk) => {
-          const response = await fetch(
-            `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
-              chunk
-            )}&langpair=en|ur`
-          );
-          if (!response.ok) throw new Error('Translation API request failed');
-          const data = await response.json();
-          if (data.responseStatus !== 200) throw new Error(data.responseDetails || 'Translation failed');
-          return data.responseData.translatedText;
-        })
-      );
-      return translatedChunks.join(' ');
+      const response = await fetch(`${BACKEND_URL}/translate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          text: text,
+          target_language: 'Urdu'
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Translation failed');
+      }
+
+      const data: { translated_text: string } = await response.json();
+      return data.translated_text;
     } catch (err) {
       console.error('Translation error:', err);
-      throw new Error('Failed to translate content. API Limit has reached.');
+      if (err instanceof Error) {
+        throw err;
+      }
+      throw new Error('Failed to translate content. Please try again.');
     }
   }
 
@@ -199,18 +208,21 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
     // Case 2: Original Content Translated
     if (translated && translatedContent) {
       return (
-        <div 
-          className={styles.urduContent}
-          style={{ 
-            direction: 'rtl', 
-            textAlign: 'right',
-            fontFamily: 'Noto Nastaliq Urdu, "Jameel Noori Nastaleeq", Arial, sans-serif',
-            lineHeight: '2.2',
-            fontSize: '1.15em',
-            whiteSpace: 'pre-wrap'
-          }}
-        >
-          {translatedContent}
+        <div className={styles.customizedContent}>
+          <div
+            className={styles.urduContent}
+            style={{
+              direction: 'rtl',
+              textAlign: 'right',
+              fontFamily: 'Noto Nastaliq Urdu, "Jameel Noori Nastaleeq", Arial, sans-serif',
+              lineHeight: '2.2',
+              fontSize: '1.15em'
+            }}
+          >
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {translatedContent}
+            </ReactMarkdown>
+          </div>
         </div>
       );
     }

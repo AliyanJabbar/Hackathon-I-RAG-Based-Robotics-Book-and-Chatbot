@@ -5,13 +5,13 @@ from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 from contextlib import asynccontextmanager
 from pydantic import BaseModel
-from typing import List, Literal, Optional # Ensure Optional and Literal are imported
+from typing import List, Literal
 import os
 from dotenv import load_dotenv
 
 # --- EXISTING CHAT IMPORTS ---
 from agents import Agent, Runner
-from llm_config import config, gemini_key, open_router_config
+from llm_config import config, gemini_key, chat_config, customize_config, translate_config
 from qdrant.qdrant_retrieval import retrieve_data
 
 # --- AUTH & DB IMPORTS ---
@@ -234,7 +234,7 @@ async def customize_text_content(
         customized_result = await Runner.run(
             customization_agent,
             input="\n".join([f"{m.role}: {m.text}" for m in messages_for_llm]), 
-            run_config=open_router_config, 
+            run_config=customize_config, 
         )
 
         print("✅ Content customized successfully")
@@ -243,6 +243,64 @@ async def customize_text_content(
     except Exception as e:
         print("❌ Customization Error:", str(e))
         raise HTTPException(status_code=500, detail=f"Failed to customize content: {str(e)}")
+
+
+# ==========================================
+# TRANSLATION ENDPOINTS
+# ==========================================
+
+class TranslateRequest(BaseModel):
+    text: str
+    target_language: str = "Urdu"  # Default to Urdu, can be extended
+
+@app.post("/translate")
+async def translate_text(
+    request_data: TranslateRequest,
+):
+    """
+    Translates the provided text to the target language using an LLM agent.
+    """
+    print(f"   Text (first 100 chars): {request_data.text[:100]}...")
+
+    try:
+        # Define the Agent specifically for translation
+        translation_agent = Agent(
+            name="Translation AI",
+            instructions=f"""
+            You are a specialized AI assistant for translating technical content about Physical AI and Humanoid Robotics.
+            Your task is to translate the provided text to '{request_data.target_language}' language.
+
+            ### TRANSLATION GUIDELINES:
+            - **Target Language:** Translate to {request_data.target_language} (e.g., 'ur' for Urdu, 'es' for Spanish, etc.)
+            - **Technical Accuracy:** Maintain all technical terms, jargon, and concepts accurately
+            - **Context Preservation:** Keep the meaning, tone, and technical context intact
+            - **Cultural Adaptation:** Adapt examples and references appropriately for the target language if needed
+            - **Formatting:** Preserve markdown formatting, code snippets, and technical notations
+
+            ### PROCESS:
+            1. Read the provided text carefully.
+            2. Translate the entire text to {request_data.target_language}.
+            3. Ensure technical terms are translated appropriately or kept in English if standard.
+            4. Output only the translated text, do not add conversational remarks.
+            """,
+        )
+
+        messages_for_llm = [
+            ChatMessage(role="user", text=f"Please translate the following text to {request_data.target_language}:\n\n{request_data.text}")
+        ]
+
+        translation_result = await Runner.run(
+            translation_agent,
+            input="\n".join([f"{m.role}: {m.text}" for m in messages_for_llm]),
+            run_config=translate_config,
+        )
+
+        print("✅ Translation completed successfully")
+        return {"translated_text": translation_result.final_output}
+
+    except Exception as e:
+        print("❌ Translation Error:", str(e))
+        raise HTTPException(status_code=500, detail=f"Failed to translate text: {str(e)}")
 
 
 # ==========================================
@@ -309,7 +367,7 @@ async def chat(request: ChatRequest):
         result = await Runner.run(
             agent,
             input=conversation_context,
-            run_config=open_router_config,
+            run_config=chat_config,
         )
 
         print("✅ Response generated successfully")
