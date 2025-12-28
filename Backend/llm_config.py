@@ -81,3 +81,70 @@ translate_openrouter_model = OpenAIChatCompletionsModel(
 translate_config = RunConfig(
     model=translate_openrouter_model,
 )
+
+
+
+# ------------------------------ groq config ------------------------------ 
+
+# Chatbot
+groq_key_chatbot = os.getenv("GROQ_API_KEY_CHATBOT")
+
+if not groq_key_chatbot:
+    raise ValueError("GROQ_API_KEY_CHATBOT not found in environment variables")
+
+groq_client_chatbot = AsyncOpenAI(
+    api_key=groq_key_chatbot,
+    base_url="https://api.groq.com/openai/v1",
+)
+
+groq_model_chatbot = OpenAIChatCompletionsModel(
+    model="openai/gpt-oss-20b", 
+    openai_client=groq_client_chatbot
+)
+
+groq_config_chatbot = RunConfig(
+    model=groq_model_chatbot,
+    model_provider=groq_client_chatbot
+)
+
+# Content Customization
+groq_key_content = os.getenv("GROQ_API_KEY_CONTENT")
+
+if not groq_key_content:
+    raise ValueError("GROQ_API_KEY_CONTENT not found in environment variables")
+
+groq_client_content = AsyncOpenAI(
+    api_key=groq_key_content,
+    base_url="https://api.groq.com/openai/v1",
+)
+
+groq_model_content = OpenAIChatCompletionsModel(
+    model="openai/gpt-oss-20b", 
+    openai_client=groq_client_content
+)
+
+groq_config_content = RunConfig(
+    model=groq_model_content,
+    model_provider=groq_client_content
+)
+
+# Translation
+groq_key_translation = os.getenv("GROQ_API_KEY_TRANSLATE")
+
+if not groq_key_translation:
+    raise ValueError("GROQ_API_KEY_TRANSLATE not found in environment variables")
+
+groq_client_translation = AsyncOpenAI(
+    api_key=groq_key_translation,
+    base_url="https://api.groq.com/openai/v1",
+)
+
+groq_model_translation = OpenAIChatCompletionsModel(
+    model="openai/gpt-oss-20b", 
+    openai_client=groq_client_translation
+)
+
+groq_config_translation = RunConfig(
+    model=groq_model_translation,
+    model_provider=groq_client_translation
+)

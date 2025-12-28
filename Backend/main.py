@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 # --- EXISTING CHAT IMPORTS ---
 from agents import Agent, Runner
-from llm_config import config, gemini_key, chat_config, customize_config, translate_config
+from llm_config import gemini_key, groq_config_chatbot, groq_config_content, groq_config_translation
 from qdrant.qdrant_retrieval import retrieve_data
 
 # --- AUTH & DB IMPORTS ---
@@ -234,7 +234,7 @@ async def customize_text_content(
         customized_result = await Runner.run(
             customization_agent,
             input="\n".join([f"{m.role}: {m.text}" for m in messages_for_llm]), 
-            run_config=customize_config, 
+            run_config=groq_config_content, 
         )
 
         print("✅ Content customized successfully")
@@ -292,7 +292,7 @@ async def translate_text(
         translation_result = await Runner.run(
             translation_agent,
             input="\n".join([f"{m.role}: {m.text}" for m in messages_for_llm]),
-            run_config=translate_config,
+            run_config=groq_config_translation,
         )
 
         print("✅ Translation completed successfully")
@@ -367,7 +367,7 @@ async def chat(request: ChatRequest):
         result = await Runner.run(
             agent,
             input=conversation_context,
-            run_config=chat_config,
+            run_config=groq_config_chatbot,
         )
 
         print("✅ Response generated successfully")
