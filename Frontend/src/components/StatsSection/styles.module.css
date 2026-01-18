@@ -1,0 +1,157 @@
+/* StatsSection Styles */
+
+.section {
+    padding: 5rem 0;
+    width: 100%;
+    background: var(--ifm-background-surface-color);
+    overflow: hidden;
+}
+
+.container {
+    max-width: var(--ifm-container-width);
+    margin: 0 auto;
+    padding: 0 var(--ifm-spacing-horizontal);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.tagline {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--ifm-color-primary);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* Stats Grid */
+.statsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 640px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 996px) {
+    .statsGrid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.5rem;
+    }
+}
+
+/* Stat Card */
+.statCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    background: var(--ifm-card-background-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: var(--ifm-global-radius);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.statCard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ifm-global-shadow-md);
+    border-color: var(--ifm-color-primary);
+}
+
+/* Icon */
+.iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: var(--ifm-color-primary-lightest);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+[data-theme='dark'] .iconContainer {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.icon {
+    font-size: 2rem;
+    color: var(--ifm-color-primary);
+}
+
+.statCard:hover .iconContainer {
+    background-color: var(--ifm-color-primary);
+    transform: scale(1.1);
+}
+
+.statCard:hover .icon {
+    color: #fff;
+}
+
+/* Number */
+.number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--ifm-font-color-base);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+/* Label */
+.label {
+    font-size: 1rem;
+    color: var(--ifm-color-content-secondary);
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 996px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .section {
+        padding: 4rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .number {
+        font-size: 2rem;
+    }
+
+    .statCard {
+        padding: 1.5rem 1rem;
+    }
+
+    .iconContainer {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .icon {
+        font-size: 1.75rem;
+    }
+}

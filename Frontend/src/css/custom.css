@@ -4,6 +4,12 @@
  * work well for content-centric websites.
  */
 
+/* Prevent horizontal scrolling */
+html,
+body {
+  overflow-x: hidden;
+}
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #2e8555;
@@ -27,4 +33,50 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Theme-responsive logo styling */
+.navbar__logo img,
+.menu__logo img {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(500%) hue-rotate(120deg) brightness(95%) contrast(91%);
+  transition: filter 0.3s ease;
+}
+
+[data-theme='dark'] .navbar__logo img,
+[data-theme='dark'] .menu__logo img {
+  filter: brightness(0) saturate(100%) invert(77%) sepia(26%) saturate(1000%) hue-rotate(120deg) brightness(95%) contrast(85%);
+}
+
+/* Responsive Navbar Improvements */
+@media (max-width: 996px) {
+
+  /* Hide navbar title text on smaller screens, keep logo */
+  .navbar__title {
+    display: none;
+  }
+
+  /* Adjust navbar padding for mobile */
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  /* Ensure dropdown menus are properly positioned on mobile */
+  .navbar__item.dropdown .dropdown__menu {
+    position: absolute;
+    right: 0;
+    left: auto;
+  }
+
+  /* Hide custom navbar items (Login/Register) on mobile - they appear in hamburger menu */
+  .navbar__items--right>.navbar__item:not(.navbar__search):not(.navbar__toggle) {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Make navbar items more touch-friendly */
+  .navbar__link {
+    padding: 0.5rem;
+  }
 }

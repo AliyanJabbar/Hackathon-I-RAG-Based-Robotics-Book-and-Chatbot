@@ -102,7 +102,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Error Message */
@@ -173,12 +175,12 @@
     width: 100%;
     justify-content: center;
   }
-  
+
   .errorMessage {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .retryButton {
     width: 100%;
   }
@@ -187,8 +189,17 @@
 
 .customizeButton {
   /* You can make it look distinct or similar to the translate button */
-  background: var(--translator-btn-bg); /* Use same colors for consistency */
-  border-color: rgba(0, 0, 0, 0.15); /* Slightly different border perhaps */
+  background: var(--translator-btn-bg);
+  /* Use same colors for consistency */
+  border-color: rgba(0, 0, 0, 0.15);
+  /* Slightly different border perhaps */
+}
+
+/* Add left margin on larger screens only */
+@media (min-width: 769px) {
+  .customizeButton {
+    margin-left: 10px;
+  }
 }
 
 /* For light theme */
@@ -217,15 +228,15 @@
   color: var(--ifm-font-color-base, inherit);
 }
 
-.customizedContent h1, 
-.customizedContent h2, 
+.customizedContent h1,
+.customizedContent h2,
 .customizedContent h3 {
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   font-weight: 700;
 }
 
-.customizedContent ul, 
+.customizedContent ul,
 .customizedContent ol {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
@@ -245,7 +256,8 @@
   border-collapse: collapse;
   margin: 1.5rem 0;
   display: block;
-  overflow-x: auto; /* Adds scrollbar if table is too wide */
+  overflow-x: auto;
+  /* Adds scrollbar if table is too wide */
 }
 
 .customizedContent th,

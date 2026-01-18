@@ -10,6 +10,10 @@ import styles from "./index.module.css";
 import RagSection from "../components/RagSection";
 import CurriculumSection from "../components/CurriculumSection";
 import TechStackSection from "../components/TechStackSection";
+import StatsSection from "../components/StatsSection";
+import TestimonialsSection from "../components/TestimonialsSection";
+import FaqSection from "../components/FaqSection";
+import CtaSection from "../components/CtaSection";
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
@@ -21,8 +25,12 @@ export default function Home(): ReactNode {
       <main>
         <RagSection />
         <HomepageFeatures />
+        <StatsSection />
+        <TestimonialsSection />
         <CurriculumSection />
+        <FaqSection />
         <TechStackSection />
+        <CtaSection />
       </main>
     </Layout>
   );

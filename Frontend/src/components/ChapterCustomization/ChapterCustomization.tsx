@@ -19,15 +19,15 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
   const [error, setError] = useState<string | null>(null);
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [preferenceError, setPreferenceError] = useState<string | null>(null);
-  
+
   const [customizedContent, setCustomizedContent] = useState<string | null>(null);
   const [isContentCustomized, setIsContentCustomized] = useState(false);
 
   const {
-    siteConfig: {customFields},
+    siteConfig: { customFields },
   } = useDocusaurusContext();
   const BACKEND_URL = customFields.BACKEND_URL || 'http://localhost:8000';
-  
+
   // Recursively extract text from React children
   const extractText = useCallback((node: React.ReactNode): string => {
     if (typeof node === 'string') return node;
@@ -124,7 +124,7 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
     if (isContentCustomized) {
       setCustomizedContent(null);
       setIsContentCustomized(false);
-      setTranslated(false); 
+      setTranslated(false);
       setTranslatedContent('');
       return;
     }
@@ -159,10 +159,10 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
       }
 
       const data: { customized_content: string } = await response.json();
-      
+
       setCustomizedContent(data.customized_content);
       setIsContentCustomized(true);
-      setTranslated(false); 
+      setTranslated(false);
       setTranslatedContent('');
 
     } catch (err) {
@@ -179,10 +179,10 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
       // If the user also clicked "Translate" on the customized content
       if (translated && translatedContent) {
         return (
-          <div 
+          <div
             className={styles.urduContent}
-            style={{ 
-              direction: 'rtl', 
+            style={{
+              direction: 'rtl',
               textAlign: 'right',
               fontFamily: 'Noto Nastaliq Urdu, "Jameel Noori Nastaleeq", Arial, sans-serif',
               lineHeight: '2.2',
@@ -204,7 +204,7 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
         </div>
       );
     }
-    
+
     // Case 2: Original Content Translated
     if (translated && translatedContent) {
       return (
@@ -226,7 +226,7 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
         </div>
       );
     }
-    
+
     // Case 3: Default Original Content
     return <div className={styles.englishContent}>{children}</div>;
   };
@@ -260,7 +260,6 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
         // Button enabled only if user is logged in (user object exists)
         disabled={isLoading || isCustomizing || authLoading || !user}
         aria-label={isContentCustomized ? 'Show Original Content' : 'Customize Content according to preference'}
-        style={{ marginLeft: '10px' }}
       >
         {customizeButtonText()}
       </button>
@@ -268,16 +267,16 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
       {(error || preferenceError) && (
         <div className={styles.errorMessage}>
           <span>{error || preferenceError}</span>
-          <button 
-            onClick={error ? handleTranslate : () => {}} 
+          <button
+            onClick={error ? handleTranslate : () => { }}
             className={styles.retryButton}
           >
             Retry
           </button>
         </div>
       )}
-      
-       {authLoading && (
+
+      {authLoading && (
         <div className={styles.loadingMessage}>
           <span>Loading user authentication...</span>
         </div>

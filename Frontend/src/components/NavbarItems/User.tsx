@@ -21,18 +21,18 @@ export default function NavbarItem({ mobile }) {
   if (!user) {
     return (
       <div
-        className="navbar__item"
-        style={{ display: "flex", gap: "10px", alignItems: "center" }}
+        className={mobile ? "menu__list-item" : "navbar__item"}
+        style={mobile ? {} : { display: "flex", gap: "10px", alignItems: "center" }}
       >
         <Link to="/login" className={mobile ? "menu__link" : "navbar__link"}>
           Login
         </Link>
-        /{/* Only show button style on desktop */}
-        {!mobile && (
-          <Link
-            to="/register"
-            className={mobile ? "menu__link" : "navbar__link"}
-          >
+        {mobile ? (
+          <Link to="/register" className="menu__link">
+            Register
+          </Link>
+        ) : (
+          <Link to="/register" className="navbar__link">
             Register
           </Link>
         )}
