@@ -84,10 +84,6 @@
     color: var(--ifm-color-primary);
 }
 
-.faqQuestion:focus {
-    outline: 2px solid var(--ifm-color-primary);
-    outline-offset: -2px;
-}
 
 .questionText {
     flex: 1;

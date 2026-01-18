@@ -97,6 +97,10 @@
     color: var(--ifm-color-primary);
 }
 
+[data-theme='light'] .icon {
+    color: white;
+}
+
 .statCard:hover .iconContainer {
     background-color: var(--ifm-color-primary);
     transform: scale(1.1);
