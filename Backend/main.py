@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 # --- EXISTING CHAT IMPORTS ---
 from agents import Agent, Runner
-from llm_config import gemini_key, groq_config_chatbot, groq_config_content, groq_config_translation
+from llm_config import groq_config_chatbot, groq_config_content, groq_config_translation
 from qdrant.qdrant_retrieval import retrieve_data
 
 # --- AUTH & DB IMPORTS ---
@@ -381,8 +381,5 @@ async def chat(request: ChatRequest):
 @app.get("/")
 async def health():
     return {
-        "status": "healthy",
-        "response": "api set" if gemini_key else "API key missing",
-        "gemini_api_key_set": bool(gemini_key),
         "web_url": os.getenv("WEB_URL", "not set"),
     }

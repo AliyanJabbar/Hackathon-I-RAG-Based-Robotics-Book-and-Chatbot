@@ -20,7 +20,7 @@ embed_model = "embed-english-v3.0"
 
 # Connection with Qdrant Cloud
 qdrant = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
-
+print("qdrant:", qdrant)
 
 # ------------------------------------- Extract URLs from sitemap -------------------------------------
 def get_all_urls(sitemap_url):
