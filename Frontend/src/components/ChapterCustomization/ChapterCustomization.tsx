@@ -54,7 +54,8 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
       const response = await fetch(`${BACKEND_URL}/translate`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "x-vercel-protection-bypass": `${process.env.VERCEL_BYPASS_TOKEN}`
           // 'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
@@ -149,6 +150,7 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
+          "x-vercel-protection-bypass": `${process.env.VERCEL_BYPASS_TOKEN}`
         },
         body: JSON.stringify(customizationPayload),
       });
