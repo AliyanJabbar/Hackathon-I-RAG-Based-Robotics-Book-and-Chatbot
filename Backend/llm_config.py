@@ -23,7 +23,7 @@ load_dotenv()
 # )
 
 
-# openrouter configs for different purposes
+# openrouter configs for different purposes not using
 
 # chat_openrouter_key = os.getenv("OPENROUTER_API_KEY_CHATBOT")
 # if not chat_openrouter_key:
