@@ -52,13 +52,7 @@ if web_url:
 
 print("🌐 CORS allowed origins:", origins)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Temporarily relaxed for deployment
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 # app.add_middleware(
 #     CORSMiddleware,
 #     allow_origins=origins,
