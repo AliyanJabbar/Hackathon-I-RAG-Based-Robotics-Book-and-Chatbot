@@ -6,7 +6,7 @@ import { FaPaperPlane } from "react-icons/fa6";
 import { RiRobot2Line, RiCloseLine, RiFullscreenLine, RiFullscreenExitLine, RiRefreshLine } from "react-icons/ri";
 import { marked } from "marked";
 import sanitizeInput from "../../utils/sanitizeInput";
-import { useChat } from "../../context/chatContext"; 
+import { useChat } from "../../context/chatContext";
 import styles from "./styles.module.css";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
@@ -17,7 +17,7 @@ interface ChatMessage {
 
 export default function AIAssistantWidget() {
   const {
-    siteConfig: {customFields},
+    siteConfig: { customFields },
   } = useDocusaurusContext();
 
   const { isOpen, setIsOpen, draftText, clearDraftText } = useChat();
@@ -27,7 +27,7 @@ export default function AIAssistantWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [isLarge, setIsLarge] = useState(false);
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContentRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -45,7 +45,7 @@ export default function AIAssistantWidget() {
       clearDraftText();
       setTimeout(() => {
         inputRef.current?.focus();
-      }, 100); 
+      }, 100);
     }
   }, [draftText, clearDraftText]);
 
@@ -72,7 +72,10 @@ export default function AIAssistantWidget() {
     try {
       const res = await fetch(`${customFields.BACKEND_URL}/chat`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-vercel-protection-bypass": `${process.env.VERCEL_BYPASS_TOKEN}`
+        },
         body: JSON.stringify({ messages: newMessages }),
       });
 
@@ -93,7 +96,7 @@ export default function AIAssistantWidget() {
   };
 
   const handleSuggestedQuestion = (question: string) => sendMessage(question);
-  
+
   const handleRefresh = () => {
     setMessages([]);
     setShowWelcome(true);
