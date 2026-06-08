@@ -8,11 +8,12 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const {
-    siteConfig: {customFields},
+    siteConfig: { customFields },
   } = useDocusaurusContext();
 
   // Constants
   const API_URL = customFields.BACKEND_URL || 'http://localhost:8000';
+  const VERCEL_BYPASS_TOKEN = customFields.VERCEL_BYPASS_TOKEN;
 
   useEffect(() => {
     const initAuth = async () => {
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async (accessToken) => {
     try {
       const response = await axios.get(`${API_URL}/users/me`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
+        headers: { Authorization: `Bearer ${accessToken}`, "x-vercel-protection-bypass": `${VERCEL_BYPASS_TOKEN}` },
       });
       setUser(response.data);
       console.log("users:", response.data);
@@ -56,9 +57,9 @@ export const AuthProvider = ({ children }) => {
       const { access_token, refresh_token: new_refresh } = response.data;
       localStorage.setItem('access_token', access_token);
       localStorage.setItem('refresh_token', new_refresh);
-      
+
       const userRes = await axios.get(`${API_URL}/users/me`, {
-        headers: { Authorization: `Bearer ${access_token}` },
+        headers: { Authorization: `Bearer ${access_token}`, "x-vercel-protection-bypass": `${VERCEL_BYPASS_TOKEN}` },
       });
       setUser(userRes.data);
     } catch (err) {
@@ -67,7 +68,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (userData) => {
-    const response = await axios.post(`${API_URL}/register`, userData);
+    const response = await axios.post(`${API_URL}/register`, userData, { headers: { "x-vercel-protection-bypass": `${VERCEL_BYPASS_TOKEN}` } });
     return response.data;
   };
 
@@ -76,12 +77,12 @@ export const AuthProvider = ({ children }) => {
     formData.append('username', email);
     formData.append('password', password);
 
-    const response = await axios.post(`${API_URL}/token`, formData);
+    const response = await axios.post(`${API_URL}/token`, formData, { headers: { "x-vercel-protection-bypass": `${VERCEL_BYPASS_TOKEN}` } });
     const { access_token, refresh_token } = response.data;
-    
+
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('refresh_token', refresh_token);
-    
+
     await fetchUser(access_token);
   };
 

@@ -27,6 +27,7 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
     siteConfig: { customFields },
   } = useDocusaurusContext();
   const BACKEND_URL = customFields.BACKEND_URL || 'http://localhost:8000';
+  const VERCEL_BYPASS_TOKEN = customFields.VERCEL_BYPASS_TOKEN;
 
   // Recursively extract text from React children
   const extractText = useCallback((node: React.ReactNode): string => {
@@ -55,7 +56,7 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          "x-vercel-protection-bypass": `${process.env.VERCEL_BYPASS_TOKEN}`
+          "x-vercel-protection-bypass": `${VERCEL_BYPASS_TOKEN}`
           // 'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
@@ -150,7 +151,7 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
-          "x-vercel-protection-bypass": `${process.env.VERCEL_BYPASS_TOKEN}`
+          "x-vercel-protection-bypass": `${VERCEL_BYPASS_TOKEN}`
         },
         body: JSON.stringify(customizationPayload),
       });
