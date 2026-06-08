@@ -39,8 +39,9 @@ app = FastAPI(lifespan=lifespan)
 # --- CORS SETUP ---
 # Combine your WEB_URL with localhost for flexibility
 origins = [
+    "https://rag-robotics-hackathon.vercel.app",
     "http://localhost:3000",
-    "http://127.00.1:3000",
+    "http://127.0.0.1:3000",
 ]
 
 load_dotenv()
