@@ -1,14 +1,14 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
-import 'dotenv/config'; 
+import 'dotenv/config';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
   title: "Physical AI & Humanoid Robotics",
   tagline: "Physical AI & Humanoid Robotics Capstone Course",
-  favicon: "img/favicon.ico", 
+  favicon: "img/favicon.ico",
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
@@ -31,10 +31,11 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
 
-   customFields: {
+  customFields: {
     // Add the specific variables you need in React here
     BACKEND_URL: process.env.BACKEND_URL || 'http://localhost:8000',
     WEB_URL: process.env.WEB_URL || 'http://localhost:3000',
+    VERCEL_BYPASS_TOKEN: process.env.VERCEL_BYPASS_TOKEN,
   },
 
   plugins: [
