@@ -26,8 +26,10 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
   const {
     siteConfig: { customFields },
   } = useDocusaurusContext();
-  const BACKEND_URL = customFields.BACKEND_URL || 'http://localhost:8000';
-  const VERCEL_BYPASS_TOKEN = customFields.VERCEL_BYPASS_TOKEN;
+
+  const apiBase = process.env.NODE_ENV === 'development'
+    ? (customFields.BACKEND_URL || 'http://localhost:8000')
+    : '/api';
 
   // Recursively extract text from React children
   const extractText = useCallback((node: React.ReactNode): string => {
@@ -52,11 +54,10 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
     }
 
     try {
-      const response = await fetch(`${BACKEND_URL}/translate`, {
+      const response = await fetch(`${apiBase}/translate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          "x-vercel-protection-bypass": `${VERCEL_BYPASS_TOKEN}`
           // 'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
@@ -146,15 +147,18 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
         hardware_experience: user.hardware_experience || 'intermediate',
       };
 
-      const response = await fetch(`${BACKEND_URL}/customize_text`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          "x-vercel-protection-bypass": `${VERCEL_BYPASS_TOKEN}`
-        },
-        body: JSON.stringify(customizationPayload),
-      });
+      const response = await fetch(
+        process.env.NODE_ENV === 'development'
+          ? `${apiBase}/customize_text`
+          : `${apiBase}/customize-text`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify(customizationPayload),
+        });
 
       if (!response.ok) {
         const errorData = await response.json();
