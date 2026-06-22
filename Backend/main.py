@@ -258,6 +258,7 @@ class TranslateRequest(BaseModel):
 @app.post("/translate")
 async def translate_text(
     request_data: TranslateRequest,
+    current_user: User = Depends(get_current_user),
 ):
     """
     Translates the provided text to the target language using an LLM agent.
