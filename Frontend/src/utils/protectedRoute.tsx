@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from '@docusaurus/router';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();

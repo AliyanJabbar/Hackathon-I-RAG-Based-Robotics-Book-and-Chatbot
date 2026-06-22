@@ -20,6 +20,10 @@ export default function AIAssistantWidget() {
     siteConfig: { customFields },
   } = useDocusaurusContext();
 
+  const apiBase = process.env.NODE_ENV === 'development'
+    ? (customFields.BACKEND_URL || 'http://localhost:8000')
+    : '/api';
+
   const { isOpen, setIsOpen, draftText, clearDraftText } = useChat();
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -70,14 +74,14 @@ export default function AIAssistantWidget() {
     setShowWelcome(false);
 
     try {
-      const res = await fetch(`${customFields.BACKEND_URL}/chat`, {
+      const res = await fetch(`${apiBase}/chat`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "x-vercel-protection-bypass": `${process.env.VERCEL_BYPASS_TOKEN}`
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ messages: newMessages }),
       });
+
 
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 

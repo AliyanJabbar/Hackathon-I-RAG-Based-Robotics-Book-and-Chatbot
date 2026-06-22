@@ -35,7 +35,6 @@ const config: Config = {
     // Add the specific variables you need in React here
     BACKEND_URL: process.env.BACKEND_URL || 'http://localhost:8000',
     WEB_URL: process.env.WEB_URL || 'http://localhost:3000',
-    VERCEL_BYPASS_TOKEN: process.env.VERCEL_BYPASS_TOKEN,
   },
 
   plugins: [
