@@ -70,8 +70,23 @@ export async function proxyRequest(req: VercelRequest, res: VercelResponse, targ
     // Read body based on content type
     const contentType = resHeaders['content-type'] || '';
     if (contentType.includes('application/json')) {
-      const json = await response.json();
-      return res.json(json);
+      // Guard against the backend sending Content-Type: application/json
+      // but returning a non-JSON body (e.g. NaN, Python repr strings, malformed output).
+      const rawText = await response.text();
+      try {
+        const json = JSON.parse(rawText);
+        return res.json(json);
+      } catch (parseError) {
+        console.error(
+          `Proxy JSON parse error for ${targetUrl}. ` +
+          `Backend returned Content-Type: application/json but body was not valid JSON.\n` +
+          `Raw body (first 500 chars): ${rawText.slice(0, 500)}`
+        );
+        return res.status(502).json({
+          error: 'Bad Gateway: Backend returned invalid JSON.',
+          rawBody: rawText.slice(0, 500),
+        });
+      }
     } else {
       const text = await response.text();
       return res.send(text);

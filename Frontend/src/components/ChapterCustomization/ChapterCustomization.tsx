@@ -151,9 +151,7 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
       };
 
       const response = await fetch(
-        process.env.NODE_ENV === 'development'
-          ? `${apiBase}/customize_text`
-          : `${apiBase}/customize-text`,
+        `${apiBase}/customize_text`,
         {
           method: 'POST',
           headers: {
