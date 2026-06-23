@@ -95,7 +95,7 @@ groq_client_chatbot = AsyncOpenAI(
 )
 
 groq_model_chatbot = OpenAIChatCompletionsModel(
-    model="openai/gpt-oss-20b", 
+    model="gpt-oss-20b", 
     openai_client=groq_client_chatbot
 )
 
@@ -116,7 +116,7 @@ groq_client_content = AsyncOpenAI(
 )
 
 groq_model_content = OpenAIChatCompletionsModel(
-    model="openai/gpt-oss-20b", 
+    model="gpt-oss-20b", 
     openai_client=groq_client_content
 )
 
@@ -137,7 +137,7 @@ groq_client_translation = AsyncOpenAI(
 )
 
 groq_model_translation = OpenAIChatCompletionsModel(
-    model="openai/gpt-oss-20b", 
+    model="gpt-oss-20b", 
     openai_client=groq_client_translation
 )
 

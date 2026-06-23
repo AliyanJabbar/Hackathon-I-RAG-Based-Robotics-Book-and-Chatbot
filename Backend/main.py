@@ -243,6 +243,8 @@ async def customize_text_content(
         )
 
         print("✅ Content customized successfully")
+        if not customized_result.final_output:
+            raise HTTPException(status_code=500, detail="LLM returned an empty response. Please try again.")
         return {"customized_content": customized_result.final_output}
 
     except Exception as e:
@@ -298,6 +300,8 @@ async def translate_text(
         )
 
         print("✅ Translation completed successfully")
+        if not translation_result.final_output:
+            raise HTTPException(status_code=500, detail="LLM returned an empty response. Please try again.")
         return {"translated_text": translation_result.final_output}
 
     except Exception as e:
