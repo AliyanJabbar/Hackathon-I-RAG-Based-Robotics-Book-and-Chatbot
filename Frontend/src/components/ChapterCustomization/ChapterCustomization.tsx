@@ -66,13 +66,19 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
         }),
       });
 
+      // Always read as text first to avoid SyntaxError on non-JSON error bodies
+      const rawText = await response.text();
+      let parsed: any = null;
+      try { parsed = JSON.parse(rawText); } catch (_) { /* non-JSON body */ }
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Translation failed');
+        // Support both FastAPI's `detail` key and the proxy's `error` key
+        const message = parsed?.detail || parsed?.error || rawText || 'Translation failed';
+        throw new Error(message);
       }
 
-      const data: { translated_text: string } = await response.json();
-      if (!data.translated_text) {
+      const data: { translated_text: string } = parsed;
+      if (!data?.translated_text) {
         throw new Error('Translation succeeded but returned empty content. Please try again.');
       }
       return data.translated_text;
@@ -161,13 +167,19 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
           body: JSON.stringify(customizationPayload),
         });
 
+      // Always read as text first to avoid SyntaxError on non-JSON error bodies
+      const rawText = await response.text();
+      let parsed: any = null;
+      try { parsed = JSON.parse(rawText); } catch (_) { /* non-JSON body */ }
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Failed to customize content.');
+        // Support both FastAPI's `detail` key and the proxy's `error` key
+        const message = parsed?.detail || parsed?.error || rawText || 'Failed to customize content.';
+        throw new Error(message);
       }
 
-      const data: { customized_content: string } = await response.json();
-      if (!data.customized_content) {
+      const data: { customized_content: string } = parsed;
+      if (!data?.customized_content) {
         throw new Error('Customization succeeded but returned empty content. Please try again.');
       }
 

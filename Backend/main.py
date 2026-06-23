@@ -173,12 +173,6 @@ async def get_user_preference(current_user: User = Depends(get_current_user)):
 # CONTENT CUSTOMIZATION ENDPOINTS
 # ==========================================
 
-class ChatMessage(BaseModel):
-    role: Literal["user", "bot"]
-    text: str
-
-class ChatRequest(BaseModel):
-    messages: List[ChatMessage]
 
 # Define a new Pydantic model for the request to customize text
 class CustomizeTextRequest(BaseModel):
@@ -312,6 +306,13 @@ async def translate_text(
 # ==========================================
 # CHATBOT ENDPOINTS
 # ==========================================
+
+class ChatMessage(BaseModel):
+    role: Literal["user", "bot"]
+    text: str
+
+class ChatRequest(BaseModel):
+    messages: List[ChatMessage]
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
