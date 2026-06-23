@@ -173,6 +173,13 @@ async def get_user_preference(current_user: User = Depends(get_current_user)):
 # CONTENT CUSTOMIZATION ENDPOINTS
 # ==========================================
 
+class ChatMessage(BaseModel):
+    role: Literal["user", "bot"]
+    text: str
+
+class ChatRequest(BaseModel):
+    messages: List[ChatMessage]
+
 # Define a new Pydantic model for the request to customize text
 class CustomizeTextRequest(BaseModel):
     text: str
@@ -229,14 +236,10 @@ async def customize_text_content(
             tools=[retrieve_data] 
         )
 
-        messages_for_llm = [
-            ChatMessage(role="user", text=f"Please rewrite the following content for a user with software experience '{request_data.software_experience}' and hardware experience '{request_data.hardware_experience}':\n\n{request_data.text}")
-        ]
-
         customized_result = await Runner.run(
             customization_agent,
-            input="\n".join([f"{m.role}: {m.text}" for m in messages_for_llm]), 
-            run_config=groq_config_content, 
+            input=f"Please rewrite the following content for a user with software experience '{request_data.software_experience}' and hardware experience '{request_data.hardware_experience}':\n\n{request_data.text}",
+            run_config=groq_config_content,
         )
 
         print("✅ Content customized successfully")
@@ -288,13 +291,9 @@ async def translate_text(
             """,
         )
 
-        messages_for_llm = [
-            ChatMessage(role="user", text=f"Please translate the following text to {request_data.target_language}:\n\n{request_data.text}")
-        ]
-
         translation_result = await Runner.run(
             translation_agent,
-            input="\n".join([f"{m.role}: {m.text}" for m in messages_for_llm]),
+            input=f"Please translate the following text to {request_data.target_language}:\n\n{request_data.text}",
             run_config=groq_config_translation,
         )
 
@@ -309,13 +308,6 @@ async def translate_text(
 # ==========================================
 # CHATBOT ENDPOINTS
 # ==========================================
-
-class ChatMessage(BaseModel):
-    role: Literal["user", "bot"]
-    text: str
-
-class ChatRequest(BaseModel):
-    messages: List[ChatMessage]
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
