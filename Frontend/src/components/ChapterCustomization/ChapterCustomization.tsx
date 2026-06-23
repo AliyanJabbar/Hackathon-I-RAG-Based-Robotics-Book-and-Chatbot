@@ -72,6 +72,9 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
       }
 
       const data: { translated_text: string } = await response.json();
+      if (!data.translated_text) {
+        throw new Error('Translation succeeded but returned empty content. Please try again.');
+      }
       return data.translated_text;
     } catch (err) {
       console.error('Translation error:', err);
@@ -166,6 +169,9 @@ export default function ChapterCustomization({ children }: ChapterCustomizationP
       }
 
       const data: { customized_content: string } = await response.json();
+      if (!data.customized_content) {
+        throw new Error('Customization succeeded but returned empty content. Please try again.');
+      }
 
       setCustomizedContent(data.customized_content);
       setIsContentCustomized(true);

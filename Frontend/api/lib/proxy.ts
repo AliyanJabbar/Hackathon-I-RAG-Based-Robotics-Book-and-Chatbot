@@ -41,7 +41,8 @@ export async function proxyRequest(req: VercelRequest, res: VercelResponse, targ
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 seconds timeout
+    // 55s timeout — stays within Vercel's 60s maxDuration window for LLM-heavy endpoints
+    const timeoutId = setTimeout(() => controller.abort(), 55000);
 
     const response = await fetch(targetUrl, {
       method: req.method,
